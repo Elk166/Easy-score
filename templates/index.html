@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>乐谱转 MusicXML 一键转换工具</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family: "Microsoft YaHei", sans-serif;}
+        body{background:#f8f9fa;padding:50px 15px;display:flex;justify-content:center;align-items:center;min-height:100vh;}
+        .box{max-width:550px;width:100%;background:#fff;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,0.08);padding:45px 35px;}
+        .title{font-size:26px;font-weight:bold;text-align:center;color:#222;margin-bottom:8px;}
+        .subtitle{text-align:center;color:#666;margin-bottom:35px;font-size:15px;}
+        .upload-area{border:2px dashed #dee2e6;border-radius:12px;padding:35px 20px;text-align:center;margin-bottom:25px;}
+        .file-input{margin-bottom:18px;font-size:14px;}
+        .btn-submit{background:#2563eb;color:#fff;border:none;padding:12px 28px;border-radius:10px;font-size:16px;cursor:pointer;transition:0.2s;}
+        .btn-submit:hover{background:#1d4ed8;}
+        .success-box{background:#f0fdf4;color:#047857;padding:22px;border-radius:12px;text-align:center;margin-top:20px;}
+        .success-box h3{margin-bottom:8px;font-size:18px;}
+        .success-box p{margin-bottom:10px;font-size:14px;}
+        .download-btn{display:inline-block;background:#10b981;color:#fff;padding:10px 22px;border-radius:8px;text-decoration:none;font-size:15px;margin-top:5px;}
+        .download-btn:hover{background:#059669;}
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="title">乐谱转 MusicXML 工具</div>
+        <div class="subtitle">上传 PDF / 图片，一键转换并下载</div>
+
+        <form method="post" enctype="multipart/form-data">
+            <div class="upload-area">
+                <input type="file" name="file" class="file-input" accept=".pdf,.png,.jpg,.jpeg" required>
+                <br>
+                <button class="btn-submit" type="submit">开始转换</button>
+            </div>
+        </form>
+
+        {% if result and result.success %}
+        <div class="success-box">
+            <h3>✅ 转换成功！</h3>
+            <p>原始文件：{{ result.filename }}</p>
+            <p>MusicXML 已生成，请点击下方下载</p>
+            <a href="/download/{{ result.xml_filename }}" class="download-btn">下载 MusicXML 文件</a>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
